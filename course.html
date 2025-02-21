@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Application Programming and Hacking</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://udayton-cloud.bitbucket.io/style1.css">
+
+    <style>
+        /* Dark Mode Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 700px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .professor-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-top: 15px;
+            border: 3px solid #4CAF50;
+        }
+
+        .professor-info {
+            font-size: 18px;
+            color: #ddd;
+            margin-top: 10px;
+        }
+
+        .professor-email a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .professor-email a:hover {
+            color: #37a662;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ddd;
+            margin-top: 20px;
+            text-align: justify;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #37a662;
+        }
+
+        /* Summary Section */
+        .summary-container {
+            max-width: 800px;
+            background: #181818;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+            text-align: left;
+            margin: 20px;
+        }
+
+        .summary-container h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .summary-container ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Web Application Programming and Hacking</h1>
+
+        <!-- Professor's Headshot -->
+        <img src="C:\Users\uppiu\OneDrive\Desktop\WAPH_Indiviual_project1\images\prof2.jpeg" 
+             alt="Professor Headshot" class="professor-image">
+
+        <!-- Professor's Name and Email -->
+        <div class="professor-info">
+            <strong>Instructor: Dr. Phu Phung</strong><br>
+            <span class="professor-email">
+                Email: <a href="mailto:phu@udayton.edu">phu@udayton.edu</a>
+            </span>
+        </div>
+
+        <p>
+            The Web Application Programming and Hacking course provides students with a strong foundation in full-stack web development
+            while exploring the security challenges faced by modern web applications. The course covers both **client-side and server-side development**, 
+            focusing on how to build secure and scalable web applications using HTML, CSS, JavaScript, PHP, and MySQL.
+        </p>
+
+        <p>
+            Students will gain hands-on experience in understanding web vulnerabilities, including **SQL injection, cross-site scripting (XSS), and authentication bypass techniques.**
+            The course also introduces secure coding practices to mitigate these threats effectively.
+        </p>
+
+        <p>
+            Additionally, students will work with version control systems (Git & GitHub) and practice deploying 
+            applications in a controlled environment. By the end of this course, students will be well-versed in developing, testing, and securing web applications 
+            while following industry best practices.
+        </p>
+
+        
+        
+    </div>
+
+    <!-- Summary of Enhancements -->
+    <div class="summary-container">
+        <h2>Summary of My Web Application Enhancements</h2>
+
+        <h3>🔹 1. User Experience & Interface Improvements</h3>
+        <ul>
+            <li>Integrated a <strong>NASA Open API</strong> to dynamically fetch and display <strong>dark-themed space images</strong> as the homepage background.</li>
+            <li>Added a <strong>semi-transparent overlay</strong> to enhance text readability.</li>
+            <li>Styled the <strong>WAPH-Course button</strong> to match the "Download Resume" button for consistency.</li>
+        </ul>
+
+        <h3>🔹 2. Dynamic Functionalities Added</h3>
+        <ul>
+            <li>Implemented a <strong>clock system</strong> with both <strong>analog and digital clocks</strong> displayed at the top-right corner.</li>
+            <li>Enabled a <strong>show time feature</strong> where users can click to display the current time.</li>
+            <li>Used <strong>JavaScript cookies</strong> to remember returning visitors and display a personalized welcome message.</li>
+        </ul>
+
+        <h3>🔹 3. API Integrations & Data Fetching</h3>
+        <ul>
+            <li>Integrated <strong>JokeAPI</strong> to fetch and display programming-related jokes, scrolling from <strong>right to left</strong>.</li>
+            <li>Implemented <strong>Open-Meteo API</strong> to fetch and display the <strong>real-time temperature</strong> below the contact form.</li>
+        </ul>
+
+        <h3>🔹 4. Contact Form & Resume Download</h3>
+        <ul>
+            <li>Configured <strong>Formspree API</strong> to allow users to submit messages via the <strong>contact form</strong>.</li>
+            <li>Ensured <strong>resume download</strong> works correctly after deployment using <strong>GitHub hosting</strong> or <strong>Google Drive direct download link</strong>.</li>
+        </ul>
+
+        <h3>🔹 5. Debugging & Error Handling</h3>
+        <ul>
+            <li>Fixed the <strong>"Cannot set properties of null" error</strong> in <code>clock.js</code> by ensuring the element exists before modifying it.</li>
+            <li>Ensured <strong>JavaScript runs after the DOM loads</strong> to prevent early execution errors.</li>
+        </ul>
+
+        <h3>🙏 Special Appreciation to Professor Dr. Phu Phung</h3>
+        <p>
+            I would like to extend my sincere gratitude to <strong>Dr. Phu Phung</strong> for his guidance in the <strong>Web Application Programming and Hacking (WAPH) course</strong>.
+            His expertise in <strong>front-end & back-end development, security best practices, and API integrations</strong> has been instrumental in my learning journey.
+        </p>
+    </div>
+
+
+    <a href="portfolio.html" class="button">Back to Home</a>
+</body>
+
+</html>

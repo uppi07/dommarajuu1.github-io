@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WAPH - Upendra</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://udayton-cloud.bitbucket.io/style1.css">
+
+    <!-- Internal CSS -->
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .round {
+            border-radius: 8px;
+        }
+
+        #response {
+            background-color: #ff9800; /* Orange */
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        #joke {
+            font-weight: bold;
+            color: blue;
+            margin-top: 10px;
+        }
+
+        #ageResult {
+            font-weight: bold;
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container wrapper">
+        <!-- Header Section -->
+        <div id="top">
+            <h1>Web Application Programming And Hacking</h1>
+            <h2>Front-End Web Development Lab</h2>
+            <h3>Instructor: Dr. Phu Phung</h3>
+        </div>
+
+        <div class="wrapper">
+            <!-- Sidebar/Menu Section -->
+            <div id="menubar">
+                <h3>Student: Upendra Dommaraju</h3>
+                <div id="email" onclick="showhideEmail()">Show my email</div>
+                <script src="email.js"></script>
+                <img src="file:///home/student/waph_upendra/labs/lab2/images/uppi.jpeg" 
+                     alt="headshot" width="50">
+                <div id="digit-clock"></div> 
+                <canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
+
+                <!-- Link External JavaScript File -->
+                <script src="clock.js"></script>
+            </div>
+
+            <!-- Main Content -->
+            <div id="main">
+                <p>A simple HTML file</p>
+                <p>Using the template from <a href="http://w3schools.com/html">W3 Schools</a></p>
+
+                <hr>
+
+                <!-- Random Programming Joke Section -->
+                <h3>Random Programming Joke:</h3>
+                <div id="joke">Loading joke...</div>
+
+                <hr>
+
+                <!-- Predict Age from Name -->
+                <h3>Predict Age from Name:</h3>
+                <input type="text" id="nameInput" placeholder="Enter your name">
+                <button class="button round" onclick="getAge()">Get Age</button>
+                <div id="ageResult"></div>
+
+                <hr>
+
+                <!-- Forms Section -->
+                <b>Interactions with Forms</b>
+
+                <div>
+                    <i>Form with HTTP GET request</i>
+                    <form action="http://localhost/echo.php" method="get">
+                        Your input: <input name="data">
+                        <input class="button round" type="submit" value="Submit">
+                    </form>
+                </div>
+
+                <div>
+                    <i>Form with HTTP POST request</i>
+                    <form action="http://localhost/echo.php" method="post" name="echo_post">
+                        Your input: <input name="data">
+                        <input class="button round" type="submit" value="Submit">
+                    </form>
+                </div>
+
+                <hr>
+
+                <!-- AJAX Request Section -->
+                <div>
+                    <h3>Ajax Requests</h3>
+                    <label>Your input:</label>
+                    <input type="text" id="userInput">
+                    
+                    <!-- Ajax Echo Button -->
+                    <input class="button round" type="button" value="Ajax Echo" onclick="getEcho()">
+
+                    <!-- jQuery Ajax GET Button -->
+                    <input class="button round" type="button" value="Ajax jQuery GET" onclick="jQueryAjax()">
+
+                    <!-- jQuery Ajax POST Button -->
+                    <input class="button round" type="button" value="Ajax jQuery POST" onclick="jQueryAjaxPost()">
+
+                    <div id="response"></div>
+                </div>
+
+                <script>
+                    // Vanilla JavaScript AJAX GET Request (Ajax Echo)
+                    function getEcho() {
+                        let userInput = document.getElementById("userInput").value;
+
+                        if (userInput.trim() === "") {
+                            alert("Please enter some text.");
+                            return;
+                        }
+
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("GET", "http://localhost/echo.php?data=" + encodeURIComponent(userInput), true);
+
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                document.getElementById("response").innerHTML = "Response from server: " + xhr.responseText;
+                            }
+                        };
+
+                        xhr.send();
+                    }
+
+                    // jQuery AJAX GET Request
+                    function jQueryAjax() {
+                        var input = $("#userInput").val();
+                        if (input.length == 0) {
+                            alert("Please enter some text.");
+                            return;
+                        }
+
+                        $.get("http://localhost/echo.php?data=" + encodeURIComponent(input), function(result) {
+                            $("#response").html("Response from server: " + result);
+                        });
+
+                        $("#userInput").val(""); // Clear input field
+                    }
+
+                    // jQuery AJAX POST Request (Updated to Ensure It Shows in Network Tab)
+                    function jQueryAjaxPost() {
+                        var input = $("#userInput").val();
+                        if (input.length == 0) {
+                            alert("Please enter some text.");
+                            return;
+                        }
+
+                        $.ajax({
+                            url: "http://localhost/echo.php",
+                            type: "POST",
+                            contentType: "application/x-www-form-urlencoded",
+                            data: { data: input },
+                            success: function(result) {
+                                $("#response").html("Response from server: " + result);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error:", error);
+                            }
+                        });
+
+                        $("#userInput").val(""); // Clear input field
+                    }
+
+                    
+                    $(document).ready(function() {
+                        $.get("https://v2.jokeapi.dev/joke/Programming?type=single", function(response) {
+                            $("#joke").html(response.joke); 
+                        });
+                    });
+
+                    
+                    function getAge() {
+                        let name = document.getElementById("nameInput").value;
+
+                        if (name.trim() === "") {
+                            alert("Please enter a name!");
+                            return;
+                        }
+
+                        fetch(https://api.agify.io/?name=${name})
+                            .then(response => response.json()) 
+                            .then(data => {
+                                document.getElementById("ageResult").innerHTML = Predicted Age for "${name}": ${data.age};
+                            })
+                            .catch(error => console.log("Error fetching data:", error));
+                    }
+                </script>
+
+                <hr>
+
+                <!-- JavaScript Experiment Section -->
+                <b>Experiments with JavaScript Code</b><br>
+
+                <i>Inline JavaScript</i>
+                <div id="date" onclick="document.getElementById('date').innerHTML=Date()" 
+                     style="color: green; cursor: pointer;">
+                    Click here to show Date()
+                </div>
+
+                <hr>
+
+                <!-- Key Press Event -->
+                <b>Your Input:</b>
+                <input name="data" onkeyup="console.log('You have pressed a key')">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

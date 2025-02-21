@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upendra Dommaraju - Portfolio</title>
+    <link rel="stylesheet" href="CSS1.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJZH5HE421"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NJZH5HE421');
+</script>
+<script>
+    
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let c = cookies[i].trim();
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function checkVisit() {
+        const lastVisit = getCookie("lastVisit");
+
+        if (lastVisit === null) {
+            document.getElementById("welcome-message").innerText = "Welcome to my homepage for the first time!";
+        } else {
+            document.getElementById("welcome-message").innerText = "Welcome back! Your last visit was " + lastVisit;
+        }
+
+        // Update the cookie with the current time
+        const now = new Date();
+        setCookie("lastVisit", now.toLocaleString(), 365); // Store for 1 year
+    }
+
+    // Run the function after the page loads
+    document.addEventListener("DOMContentLoaded", checkVisit);
+</script>
+
+<body>
+    <header>
+    <div class="container">
+               <marque> <div id="welcome-message" style="color: white; text-align: center; font-size: 18px; margin-left: 600px;"></div></marque>
+
+        <div class="logo">
+            <h1>Upendra Dommaraju</h1>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="course.html" class="button">WAPH-Course</a></li>
+            </ul>
+        </nav>
+
+        <!-- Clock Section (Right Side: Analog on Top, Show Time Below) -->
+        <div class="clock-container">
+            <canvas id="analog-clock" width="50" height="50"></canvas> <!-- Analog Clock -->
+            <div id="show-time" onclick="displayTime()">Show Time</div> <!-- Clickable Show Time -->
+            <p id="weather-container">Loading weather data...</p>
+        </div>
+            <script>
+                function fetchWeather() {
+                    const weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m";
+
+                    fetch(weatherUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const temperature = data.hourly.temperature_2m[0]; // Get latest temperature
+                            document.getElementById("weather-container").innerHTML = 
+                                `<p>Current Temperature: ${temperature}°C</p>`;
+                        })
+                        .catch(error => {
+                            console.error("Error fetching weather:", error);
+                            document.getElementById("weather-container").innerHTML = 
+                                `<p>Failed to load weather data.</p>`;
+        });
+}
+
+// Fetch weather on page load
+fetchWeather();
+
+            </script>
+    </div>
+</header>
+
+<!-- Include Clock Script -->
+<script src="clock.js"></script>
+<script>
+    function displayTime() {
+    setInterval(() => {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString(undefined, { 
+            hour12: false, 
+            timeZoneName: "short" 
+        });
+        document.getElementById("show-time").innerText = timeString;
+    }, 1000); // Updates every second
+}
+
+
+</script>
+
+
+
+
+    
+    <section id="hero">
+
+        <div class="container" style="background-color: black; padding: 20px; border-radius: 10px;">
+            <h2 style="color: white;">Hello! I'm</h2>
+            <h1 style="color: white;">Upendra Dommaraju</h1>
+            <p style="color: white;">Computer Science Graduate | Data Structures & Algorithms Expert</p>
+            <a href="C:\Users\uppiu\OneDrive\Desktop\WAPH_Indiviual_project1\Upendra Dommaraju - Computer Science Graduate _ Data Structures & Algorithms Expert.pdf"target="_blank" class="btn" style="color: white;">Download Resume</a>
+        </div>
+
+        <div id="joke-container">
+            <marque><p id="joke">Fetching a joke...</p></marque>
+        </div>
+            <script>
+
+                function fetchJoke() {
+            fetch("https://v2.jokeapi.dev/joke/Programming?type=single")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("joke").innerText = data.joke;
+                    restartAnimation(); // Restart animation when new joke loads
+        })
+        .catch(error => {
+            console.error("Error fetching joke:", error);
+            document.getElementById("joke").innerText = "Failed to load joke.";
+        });
+}
+
+        // Restart animation when new joke loads
+        function restartAnimation() {
+            const jokeContainer = document.getElementById("joke-container");
+            jokeContainer.style.animation = "none"; // Reset animation
+            void jokeContainer.offsetWidth; // Force reflow
+            jokeContainer.style.animation = "scroll-joke 10s linear infinite"; // Restart animation
+        }
+
+        // Fetch joke on page load and refresh every 1 minute
+        fetchJoke();
+        setInterval(fetchJoke, 60000);
+
+
+
+
+                function fetchJoke() {
+                    fetch("https://v2.jokeapi.dev/joke/Any?type=single")
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById("joke").innerText = data.joke;
+                            animateJoke(); // Call animation when joke updates
+                        })
+                        .catch(error => {
+                            console.error("Error fetching joke:", error);
+                            document.getElementById("joke").innerText = "Failed to load joke.";
+                        });
+                }
+
+                // Function to animate joke from right to left
+                function animateJoke() {
+                    const jokeElement = document.getElementById("joke-container");
+                    jokeElement.style.right = "-300px"; // Start offscreen
+                    jokeElement.style.opacity = "1"; // Ensure it's visible
+
+                    setTimeout(() => {
+                        jokeElement.style.right = "0"; // Move into view
+                    }, 100); // Slight delay for smoother animation
+                }
+
+                // Fetch joke on page load and refresh every 1 minute
+                fetchJoke();
+                setInterval(fetchJoke, 60000);
+
+
+                function fetchNasaDarkBackground() {
+                    const query = "galaxy"; // Change to "nebula" or "deep space" for variation
+                    const nasaApiUrl = `https://images-api.nasa.gov/search?q=${query}&media_type=image`;
+
+                    fetch(nasaApiUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.collection.items.length > 0) {
+                                const images = data.collection.items.map(item => item.links[0].href);
+                                const randomImage = images[Math.floor(Math.random() * images.length)]; // Pick a random image
+                                
+                                document.getElementById("hero").style.backgroundImage = `url('${randomImage}')`;
+                                document.getElementById("hero").style.backgroundSize = "cover";
+                                document.getElementById("hero").style.backgroundPosition = "center";
+                            } else {
+                                console.error("No dark images found from NASA API");
+                            }
+                        })
+                        .catch(error => console.error("Error fetching dark-themed NASA image:", error));
+                }
+
+                // Fetch dark-themed NASA background on page load
+                fetchNasaDarkBackground();
+
+
+
+            </script>
+        
+
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <img src="C:\Users\uppiu\OneDrive\Desktop\WAPH_Indiviual_project1\images\uppi3.jpg" alt="Upendra Dommaraju">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>I'm a Master's student in Computer Science at the University of Dayton, passionate about software engineering, AI, and full-stack development.</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/upendradommaraju" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://leetcode.com/u/uppiupendra13/" target="_blank"><i class="fas fa-code"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+    <div class="container">
+        <h2>Skills</h2>
+
+        <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-bar"><span style="width: 100%;">Python</span></div>
+            <div class="skill-bar"><span style="width: 100%;">HTML</span></div>
+            <div class="skill-bar"><span style="width: 100%;">CSS</span></div>
+            <div class="skill-bar"><span style="width: 100%;">Bootstrap</span></div>
+            <div class="skill-bar"><span style="width: 60%;">JavaScript</span></div>
+            <div class="skill-bar"><span style="width: 100%;">SQL</span></div>
+            <div class="skill-bar"><span style="width: 40%;">MongoDB</span></div>
+        </div>
+
+        <div class="skill-category">
+            <h3>Frameworks</h3>
+            <div class="skill-bar"><span style="width: 100%;">Django</span></div>
+            <div class="skill-bar"><span style="width: 100%;">NumPy</span></div>
+            <div class="skill-bar"><span style="width: 100%;">Pandas</span></div>
+            <div class="skill-bar"><span style="width: 50%;">PyTest</span></div>
+        </div>
+
+        <div class="skill-category">
+            <h3>Tools</h3>
+            <div class="skill-bar"><span style="width: 100%;">GIT</span></div>
+            <div class="skill-bar"><span style="width: 100%;">Visual Studio Code</span></div>
+            <div class="skill-bar"><span style="width: 100%;">MySQL</span></div>
+            <div class="skill-bar"><span style="width: 100%;">GitHub</span></div>
+        </div>
+
+        <div class="skill-category">
+            <h3>Additional Skills</h3>
+            <div class="skill-bar"><span style="width: 85%;">Data Structures and Algorithms</span></div>
+            <div class="skill-bar"><span style="width: 80%;">Problem Solving</span></div>
+            <div class="skill-bar"><span style="width: 90%;">Object-Oriented Design</span></div>
+            <div class="skill-bar"><span style="width: 85%;">Design Patterns</span></div>
+            <div class="skill-bar"><span style="width: 80%;">Low-Level Design</span></div>
+            <div class="skill-bar"><span style="width: 75%;">Agile Methodologies</span></div>
+            <div class="skill-bar"><span style="width: 80%;">Unit Testing</span></div>
+            <div class="skill-bar"><span style="width: 70%;">Operating Systems</span></div>
+            <div class="skill-bar"><span style="width: 75%;">Database Management Systems</span></div>
+            <div class="skill-bar"><span style="width: 85%;">Version Control</span></div>
+        </div>
+    </div>
+</section>
+
+
+    <section id="experience">
+    <div class="container">
+        <h2>Work Experience</h2>
+
+        <div class="experience-item">
+            <h3>Accenture, Chennai, India</h3>
+            <p><strong>Associate Software Engineer</strong> | Aug 2022 - Oct 2023</p>
+            <ul>
+                <li>Led a team of developers in an agile environment, ensuring smooth sprint cycles and the on-time delivery of three high-impact web applications, all of which were launched ahead of deadlines and received exceptional feedback from both internal stakeholders and end-users.</li>
+                <li>Resolved 15+ critical UI/UX issues, significantly enhancing user engagement and driving a 25% increase in overall user satisfaction metrics.</li>
+                <li>Optimized web application performance, reducing page load times by 30% through advanced code refactoring and efficient resource utilization.</li>
+                <li>Collaborated with cross-functional teams, including UX/UI designers and QA engineers, to align with product requirements and deliver a user-centered design that met both functional and aesthetic goals.</li>
+                <li>Utilized modern front-end technologies, such as JavaScript, to boost web application efficiency by 40% and scalability by 50%, resulting in a more robust, scalable, and future-proof product.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>Verzeo, Bangalore, India</h3>
+            <p><strong>Web Developer Intern</strong> | Nov 2021 - Mar 2022</p>
+            <ul>
+                <li>Enhanced the site's visual appeal and user experience by implementing advanced CSS and JavaScript techniques, resulting in a 25% increase in user retention and creating a more modern, streamlined web presence.</li>
+                <li>Applied responsive design principles and leveraged modern front-end frameworks, delivering a sleek, polished website that improved cross-device compatibility and user engagement.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+    <section id="projects">
+    <div class="container">
+        <h2>Project Work</h2>
+
+        <div class="project-item">
+            <h3>Finance Dashboard with Machine Learning Predictions</h3>
+            <p><strong>(Work in Progress - Team) | Expected Completion: Jan 2025</strong></p>
+            <ul>
+                <li>Leading the development of a financial dashboard designed to analyze and predict financial trends, enabling users to make data-driven decisions.</li>
+                <li>Leveraging Python for advanced data analysis, integrating interactive chart visualizations, and implementing a Random Forest Classifier for predictive analytics.</li>
+                <li>Aims to enhance financial forecasting accuracy by 20%, utilizing cutting-edge data visualization libraries to provide actionable insights.</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <h3>Blogging Platform</h3>
+            <p><strong>Completed</strong></p>
+            <ul>
+                <li>Developed a full-stack web application that enables users to create, post, and manage blogs and articles.</li>
+                <li>Implemented a clean, responsive design to ensure seamless user interaction across devices using HTML, CSS, and JavaScript.</li>
+                <li>Efficiently managed content storage and retrieval with SQL, ensuring secure data management and an intuitive user experience.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact">
+    <div class="container">
+        <h2>Contact Me</h2>
+        <button id="show-email-btn" class="button" onclick="toggleEmail()">Show Email</button>
+        <a id="email-text" href="mailto:uppiupendra13@gmail.com" style="display: none; color: white; text-decoration: none;">
+            uppiupendra13@gmail.com
+        </a>
+        <script>
+            function toggleEmail() {
+                var emailLink = document.getElementById("email-text");
+                var button = document.getElementById("show-email-btn");
+
+                if (emailLink.style.display === "none") {
+                    emailLink.style.display = "inline"; // Show the email link
+                    button.style.display = "none"; // Hide the button
+                }
+            }
+
+        </script>
+
+        
+
+        <div class="contact-form">
+            <form action="https://formspree.io/f/xzzdoelb" method="POST">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Type your message..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+
+
+        </div>
+
+    </div>
+</section>
+
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Upendra Dommaraju</p>
+        </div>
+    </footer>
+</body>
+</html>
